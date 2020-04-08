@@ -1,0 +1,56 @@
+<div *ngIf="error">Karyawan with ID {{ this.id }} is not available</div>
+
+<form>
+  <h1>Karyawan Form</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Nama Karyawan</mat-label>
+    <input matInput placeholder="type the your name" name="namaKaryawan" id="namaKaryawan"
+      [(ngModel)]="karyawan.namaKaryawan" />
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="outline">
+    <mat-label>Tunjangan</mat-label>
+    <input matInput placeholder="type benefit" name="tunjangan" id="tunjangan" [(ngModel)]="karyawan.tunjangan" />
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="outline">
+    <mat-label>Gaji</mat-label>
+    <input matInput placeholder="type allowance" name="gaji" id="gaji" [(ngModel)]="karyawan.gaji" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Divisi Pekerjaan</mat-label>
+    <mat-select matNativeControl name="divisiPekerjaan" id="divisiPekerjaan" [(ngModel)]="karyawan.divisiPekerjaan">
+      <mat-option value="Marketing">
+        Marketing
+      </mat-option>
+      <mat-option value="IT">
+        Teknik Informatika
+      </mat-option>
+      <mat-option value="Sales">
+        Sales
+      </mat-option>
+      <mat-option value="Mandor">
+        Mandor
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="buttons">
+    <div *ngIf="update">
+      <button mat-raised-button color="warn" (click)="deleteKaryawan()">
+        delete
+      </button>
+      <button mat-raised-button color="primary" (click)="updateKaryawan()">
+        update
+      </button>
+      <button mat-raised-button color="warn" (click)="openDialog()">
+        Info
+      </button>
+    </div>
+    <div *ngIf="!update">
+      <button mat-raised-button (click)="postKaryawan()" color="primary">
+        post
+      </button>
+    </div>
+  </div>
+</form>
