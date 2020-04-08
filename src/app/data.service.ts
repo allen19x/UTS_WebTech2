@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl = 'https://crudcrud.com/api/f6b4e796a0cc4afebbebd064be2d0d59'; // berbeda untuk setiap mahasiswa
+  baseUrl = 'https://crudcrud.com/api/f29c8e4dbf4542cda97389f60b865780'; // berbeda untuk setiap mahasiswa
 
   constructor(private http: HttpClient) { }
 
