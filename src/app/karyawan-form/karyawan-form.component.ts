@@ -3,8 +3,9 @@ import { Karyawan } from '../karyawan';
 import { DataService } from '../data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-karyawan-form',
@@ -26,17 +27,31 @@ export class KaryawanFormComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private ds: DataService,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog : MatDialog
+    public dialog: MatDialog
   ) { }
+
+  karyawanForm = this.formBuilder.group({
+    namaKaryawan: ["", [Validators.required]],
+    tunjangan: ["", [Validators.required]],
+    gaji: ["", [Validators.required]],
+    divisiPekerjaan: ["", [Validators.required]],
+  })
+
+  namaKaryawan = this.karyawanForm.get("namakaryawan");
+  tunjangan = this.karyawanForm.get("tunjangan");
+  gaji = this.karyawanForm.get("gaji");
+  divisiPekerjaan = this.karyawanForm.get("divisiPekerjaan");
+
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
   }
 
-  openDialog(){
+  openDialog() {
     this.dialog.open(DialogComponent);
   }
 
@@ -62,6 +77,8 @@ export class KaryawanFormComponent implements OnInit {
   }
 
   postKaryawan() {
+    const param = this.karyawanForm.value;
+    delete param.check;
     this.ds.postKaryawan(this.karyawan).subscribe(response => {
       // tampilkan notifikasi
       this.openSnackBar("Karyawan Added", null)
@@ -94,4 +111,4 @@ export class KaryawanFormComponent implements OnInit {
       }
     );
   }
-}
+} 

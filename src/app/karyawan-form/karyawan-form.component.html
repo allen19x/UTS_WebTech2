@@ -1,21 +1,32 @@
-<div *ngIf="error">Karyawan with ID {{ this.id }} is not available</div>
-
-<form>
+<form [formGroup]="karyawanForm">
   <h1>Karyawan Form</h1>
   <mat-form-field appearance="outline">
     <mat-label>Nama Karyawan</mat-label>
-    <input matInput placeholder="type the your name" name="namaKaryawan" id="namaKaryawan"
+    <input 
+    formControlName='namaKaryawan'
+    matInput placeholder="type the your name" name="namaKaryawan" id="namaKaryawan"
       [(ngModel)]="karyawan.namaKaryawan" />
+    <mat-error>
+      name has to be 5 characters mininum and cannot be empty
+    </mat-error>
   </mat-form-field>
   <br />
   <mat-form-field appearance="outline">
     <mat-label>Tunjangan</mat-label>
-    <input matInput placeholder="type benefit" name="tunjangan" id="tunjangan" [(ngModel)]="karyawan.tunjangan" />
+    <input 
+    formControlName='tunjangan' matInput placeholder="type benefit" name="tunjangan" id="tunjangan" [(ngModel)]="karyawan.tunjangan" />
+    <mat-error>
+      name has to be 5 characters mininum and cannot be empty
+    </mat-error>
   </mat-form-field>
   <br />
   <mat-form-field appearance="outline">
     <mat-label>Gaji</mat-label>
-    <input matInput placeholder="type allowance" name="gaji" id="gaji" [(ngModel)]="karyawan.gaji" />
+    <input 
+    formControlName='gaji' matInput placeholder="type allowance" name="gaji" id="gaji" [(ngModel)]="karyawan.gaji" />
+    <mat-error>
+      name has to be 5 characters mininum and cannot be empty
+    </mat-error>
   </mat-form-field>
   <br />
   <mat-form-field>
@@ -40,7 +51,7 @@
       <button mat-raised-button color="warn" (click)="deleteKaryawan()">
         delete
       </button>
-      <button mat-raised-button color="primary" (click)="updateKaryawan()">
+      <button mat-raised-button color="primary" (click)="updateKaryawan()" [disabled]="karyawanForm.invalid">
         update
       </button>
       <button mat-raised-button color="warn" (click)="openDialog()">
@@ -48,7 +59,7 @@
       </button>
     </div>
     <div *ngIf="!update">
-      <button mat-raised-button (click)="postKaryawan()" color="primary">
+      <button mat-raised-button (click)="postKaryawan()" color="primary" [disabled]="karyawanForm.invalid">
         post
       </button>
     </div>
